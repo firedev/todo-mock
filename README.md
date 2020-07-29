@@ -44,6 +44,7 @@ PRIORITIES = {
 - https://github.com/jquense/yup - validation
 - https://github.com/datejs/Datejs - human date parser
 - https://github.com/wojtekmaj/react-calendar - dropdown calendar
+- https://github.com/rexxars/react-markdown - for markdown
 
 # Interface
 
@@ -133,8 +134,21 @@ Component that displays a stack of `TaskCard` + `AddTask`, see [column.png](colu
 
 One can use board as simple scheduler, cards with no near dates, today, tomorrow, and due later.
 
-- Cards are auto-sorted based on `scheduledDate` and `completed` using the following rules, they are applied top to bottom: - no `scheduledDate` - `Backlog` - `scheduledDate` is `today` - `Today` - `scheduledDate` is `tomorrow` - `Tomorrow` - `scheduledDate` exists and not `[today, tomorrow]` - `Scheduled` - `completed`, with any dates – `Done`
-- Dragging card from one column to another changes it's `scheduledDate`, and sets/clears `completed` if applicable: - `Backlog` - clear `scheduledDate`, `completed: false` - `Today` - set `scheduledDate` to `today`, `completed: false` - `Tomorrow` - set `scheduledDate` to `tomorrow`, `completed: false` - `Scheduled` - set `completed: false`, display the date popup if `scheduledDate` is `[ null, today, tomorrow ]`
+- Cards are auto-sorted based on `scheduledDate` and `completed` using the following rules, they are applied top to bottom:
+
+  - no `scheduledDate` - `Backlog`
+  - `scheduledDate` is `today` - `Today`
+  - `scheduledDate` is `tomorrow` - `Tomorrow`
+  - `scheduledDate` exists and not `[today, tomorrow]` - `Scheduled`
+  - `completed`, with any dates – `Done`
+
+- Dragging card from one column to another changes it's `scheduledDate`, and sets/clears `completed` if applicable:
+
+  - `Backlog` - clear `scheduledDate`, `completed: false`
+  - `Today` - set `scheduledDate` to `today`, `completed: false`
+  - `Tomorrow` - set `scheduledDate` to `tomorrow`, `completed: false`
+  - `Scheduled` - set `completed: false`, display the date popup if `scheduledDate` is `[ null, today, tomorrow ]`
+
 - Due date can only be changed manually
 
 # `TaskForm`
@@ -143,6 +157,7 @@ This is what the user sees when they click the card or `Add task`
 
 ![](task-create-edit.png)
 
+- There is only one self-expanding text area for both title and description, everything after the first newline is considered as description.
 - `Add task` prefills `scheduledDate` depending on a column:
   - `Backlog` - nothing is prefilled
   - `Today` - `scheduledDate` is set to today
