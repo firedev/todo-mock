@@ -38,6 +38,7 @@ PRIORITIES = {
 
 - https://github.com/facebook/react - for components
 - https://github.com/apollographql/react-apollo - for data loading
+- https://github.com/ReactTraining/react-router - routing and UI state
 - https://github.com/atlassian/react-beautiful-dnd for drag and drop
 - https://github.com/formium/formik - forms
 - https://github.com/jquense/yup - validation
@@ -58,7 +59,9 @@ PRIORITIES = {
 - When creating/editing a task we display all fields, but pre-fill `scheduledDate` depending on a column.
 - Users can change data and the card could end up in a different column after save.
 - New card goes to the top of the list so it's not confusing
+- State in url, active column, active card, calendar, etc.
 - On the mobile phone we see only one column, so the app shows the resulting column the card is added to.
+  - We store the active column in the url like so `/:column/:task_uuid(/calendar)` so we know which column to display when the screen is small
 - I propose `apollo-graphql` with optimistic updates turned on, so after validation in the frontend we can be almost sure the actual data will be correct and update interface right away.
 - Generate `uuid` in the frontend as well
 - When one starts dragging a card on the mobile phone, replace the column view with slots to drop the card into:
@@ -148,6 +151,7 @@ This is what the user sees when they click the card or `Add task`
 - Card is highlighted after creation so it can be easily seen.
 - On the mobile the view switches to the column the card is created in
   - The simplest way to do this is via `CSS`, so the last column has `.active` class and the other ones are hidden when the viewport is too small.
+  - We store the active column in the url like `/:column/:task_uuid(/calendar)` but it only changes what is visible on mobile devices
 - They can enter dates manually or via dropdown once they focus in a field
 - Manual entry is very fast on the desktop as you can just type `13` or `monday` and it will be recognized.
 - By default priority is `P3` (low)
