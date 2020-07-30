@@ -1,5 +1,7 @@
 # Todo Mockup
 
+We're making a Kanban ToDo app with a few column and three levels of prioritization. Each task has two date fields and sorted automatically depending on the schedule date.
+
 ```js
 task = {
   id: uuid.required,
