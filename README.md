@@ -81,6 +81,7 @@ PRIORITIES = {
 +----------+
 ```
 
+- Probably worth color-coding the columns
 - When card needs to be scheduled use an additional route to display the calendar `/tasks/id/schedule` this way the state is easy to manage and until the user enters the date the card stays where it was
 - When creating a card in scheduled column without the date we should drop it to the `Backlog` and let user decide, if time allows - add an `Are you sure?` dialog
 - Cards are split per column by their `id` and if time permits – `position`:
@@ -101,6 +102,10 @@ state: {
   }
 },
 ```
+
+- The idea is to fetch a flat list from the server and "hydrate" the state:
+  - Each key in the `tasks` object equals `task.id` for this key. This would allow us a direct access to each task using `task[taskId]` without searching through the array.
+  - `column` is referenced front the the `card` as well. This makes it easier to work with the cards and columns since you know which column it resides in.
 
 # `TaskCard`
 
@@ -133,6 +138,8 @@ Component that displays a stack of `TaskCard` + `AddTask`, see [column.png](colu
 # `TaskBoard`
 
 One can use board as simple scheduler, cards with no near dates, today, tomorrow, and due later.
+
+![](board.png)
 
 - Cards are auto-sorted based on `scheduledDate` and `completed` using the following rules, they are applied top to bottom:
 
@@ -181,60 +188,62 @@ This is what the user sees when they click the card or `Add task`
 
 # Estimates
 
-`3` is a standard task, roughly half a day's work.
+Tasks are estimated in scores not hours. `3` is a "`standard task`" that you know how to do. And if the coast is clear you do one before lunch, one after and pick up a couple of smaller ones along the way. `5` is something you are not so sure about or maybe it needs to be broken down into smaller tasks.
 
-## Day 1 - Task Card
+## Day 1 - Data Handling
 
-- TaskCard component - 5
+- Project Setup - 3
+- Data loading - 3
+- Data splitting - 2
 
-  - Responsive styles
-  - Subcomponents for priority, dates
+## Day 2 - `TaskCard`
 
-- Data loading and splitting - 3
+- TaskCard component - 1
+- Subcomponents for priority, dates - 2
+- Responsive styles - 2
 
-## Day 2 - Task Column
+## Day 3 - `TaskColumn`
 
-- TaskColumn component - 5
-
+- TaskColumn component - 3
   - Display Cards nicely
-  - Add title
-  - Add dropdown for on mobile
-
+- Add dropdown for mobile - 2
 - Add task component - 3
 
-## Day 3 - Task Board
+## Day 4 - `TaskBoard`
 
-- Board layout - 2
+- Board layout with multiple columns - 2
+- Mobile version - 2
+- Add drag-n-drop - 2
+- Add placeholders - 2
+- Mobile drop target - 2
 
-  - Display multiple columns
+## Day 5 - `TaskForm`
 
-- Add drag-n-drop - 3
+- `TaskForm` component - 3
+- Error handling - 3
+- Create/edit card - 3
 
-  - Add placeholders
+## Day 6 - Card Creation
 
-- Card form - 5
+- Card created with no date - 2
+- Card created for today - 2
+- Card created for tomorrow - 2
 
-  - Create/edit card
-  - Card created with no date
-  - Card created for today
-  - Card created for tomorrow
+## Day 7 - Card Creation 2
 
-## Day 4 - Card Create
+- Scheduled card creation - 2
+- Scheduler popup - 3
+- Calendar - 3
 
-- Scheduled card creation - 5
-
-  - Scheduler popup
-  - Calendar
+## Day 8 - Done Column
 
 - Make sure unscheduled Tasks display popup when dropped in the schedules column - 3
-
-## Day 5 - Done Column
-
 - Done column - 3
 
-  - Convert cards to Done when dropped
+## EXTRA: Positioning
 
-- EXTRA: Positioning - 5
+- Add position column - 2
+- Allow drag and drop withing a column - 3
 
 # Figures
 
